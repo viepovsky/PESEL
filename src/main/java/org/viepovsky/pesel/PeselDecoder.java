@@ -32,8 +32,8 @@ class PeselDecoder {
         return LocalDate.of(year, month, day);
     }
 
-    Gender decodeGender(String pesel) {
+    Pesel.Gender decodeGender(String pesel) {
         int genderDigit = Character.getNumericValue(pesel.charAt(9));
-        return genderDigit % 2 == 0 ? Gender.FEMALE : Gender.MALE;
+        return genderDigit % 2 == 0 ? Pesel.Gender.FEMALE : Pesel.Gender.MALE;
     }
 }

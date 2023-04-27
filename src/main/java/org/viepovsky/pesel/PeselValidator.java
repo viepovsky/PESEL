@@ -6,30 +6,30 @@ public class PeselValidator {
     private static final int[] CONTROL_WAGES = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     private static final PeselDecoder PESEL_DECODER = new PeselDecoder();
 
-    public static boolean isPeselValid(String pesel) {
+    public static boolean isValid(String pesel) {
         try {
-            assertIsPeselValid(pesel);
+            assertIsValid(pesel);
             return true;
         } catch (InvalidPeselException e) {
             return false;
         }
     }
 
-    public static void assertIsPeselValid(String pesel) throws InvalidPeselException {
+    public static void assertIsValid(String pesel) throws InvalidPeselException {
         if (pesel == null) {
             throw new InvalidPeselException("PESEL cannot be null");
         }
         if (pesel.length() != 11) {
-            throw new InvalidPeselException("PESEL length must be 11.");
+            throw new InvalidPeselException("PESEL length is invalid");
         }
         if (!pesel.matches("[0-9]*")) {
-            throw new InvalidPeselException("PESEL can contain only digits.");
+            throw new InvalidPeselException("PESEL contains invalid characters");
         }
         if (!isControlDigitValid(pesel)) {
-            throw new InvalidPeselException("PESEL control number is invalid.");
+            throw new InvalidPeselException("PESEL control sum number is invalid");
         }
         if (!isBirthDateValid(pesel)) {
-            throw new InvalidPeselException("PESEL birth date is not valid.");
+            throw new InvalidPeselException("PESEL birth date is invalid");
         }
     }
 

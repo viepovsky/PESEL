@@ -1,6 +1,6 @@
 package org.viepovsky.pesel;
 
-class InvalidPeselException extends Exception {
+public class InvalidPeselException extends Exception {
     InvalidPeselException(String message) {
         super(message);
     }

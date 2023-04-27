@@ -12,7 +12,7 @@ public class Pesel {
     }
 
     private Pesel(PeselDecoder peselDecoder, String pesel) throws InvalidPeselException {
-        PeselValidator.assertIsPeselValid(pesel);
+        PeselValidator.assertIsValid(pesel);
         this.peselNumbers = new PeselNumbers(pesel);
         this.birthDate = peselDecoder.decodeBirthDate(pesel);
         this.gender = peselDecoder.decodeGender(pesel);
@@ -28,5 +28,9 @@ public class Pesel {
 
     public PeselNumbers getPeselNumbers() {
         return peselNumbers;
+    }
+    enum Gender {
+        MALE,
+        FEMALE
     }
 }
