@@ -1,7 +1,5 @@
 package org.viepovsky.pesel;
 
-import java.time.LocalDate;
-
 class PeselNumbers {
     private final int[] birthDateNumbers;
     private final int[] randomNumbers;
@@ -9,7 +7,7 @@ class PeselNumbers {
     private final int controlNumber;
     PeselNumbers(String pesel) {
         birthDateNumbers = addBirthDateNumbers(pesel.substring(0,6));
-        randomNumbers = addRandomNumbers(pesel.substring(6,8));
+        randomNumbers = addRandomNumbers(pesel.substring(6,9));
         genderNumber = Character.getNumericValue(pesel.charAt(9));
         controlNumber = Character.getNumericValue(pesel.charAt(10));
     }

@@ -1,6 +1,6 @@
 package org.viepovsky.pesel;
 
-enum PeselGender {
+enum Gender {
     MALE,
     FEMALE
 }

@@ -1,7 +1,20 @@
 package org.viepovsky.pesel;
 
+import java.time.DateTimeException;
+
 public class PeselValidator {
-    public void isPeselValid(String pesel) throws InvalidPeselException {
+    private static final int [] CONTROL_WAGES = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+    private static final PeselDecoder PESEL_DECODER = new PeselDecoder();
+
+    public static boolean isPeselValid(String pesel) {
+        try {
+            assertIsPeselValid(pesel);
+            return true;
+        } catch (InvalidPeselException e) {
+            return false;
+        }
+    }
+    public static void assertIsPeselValid(String pesel) throws InvalidPeselException {
         if (pesel.length() != 11) {
             throw new InvalidPeselException("Wrong PESEL length.");
         }
@@ -16,11 +29,10 @@ public class PeselValidator {
         }
     }
 
-    private boolean isControlDigitValid(String pesel) {
+    private static boolean isControlDigitValid(String pesel) {
         int controlSum = 0, controlDigit = Character.getNumericValue(pesel.charAt(10));
-        int[] controlWage = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
         for (int i = 0; i < 10; i++) {
-            int multiplyNumber = controlWage[i] * Character.getNumericValue(pesel.charAt(i));
+            int multiplyNumber = CONTROL_WAGES[i] * Character.getNumericValue(pesel.charAt(i));
             if (multiplyNumber >= 10) {
                 controlSum += Character.getNumericValue(String.valueOf(multiplyNumber).charAt(1));
             } else {
@@ -33,11 +45,12 @@ public class PeselValidator {
         return controlDigit == (10 - controlSum);
     }
 
-    private boolean isBirthDateValid(String pesel) {
-    }
-
-    PeselGender decodeGender(String pesel) {
-        int genderDigit = Character.getNumericValue(pesel.charAt(9));
-        return genderDigit % 2 == 0 ? PeselGender.FEMALE : PeselGender.MALE;
+     private static boolean isBirthDateValid(String pesel) {
+        try {
+            PESEL_DECODER.decodeBirthDate(pesel);
+            return true;
+        } catch (DateTimeException e) {
+            return false;
+        }
     }
 }
