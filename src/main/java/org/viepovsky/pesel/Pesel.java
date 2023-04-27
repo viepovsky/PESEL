@@ -6,9 +6,11 @@ public class Pesel {
     private final LocalDate birthDate;
     private final Gender gender;
     private final PeselNumbers peselNumbers;
-    public Pesel (String pesel) throws InvalidPeselException {
+
+    public Pesel(String pesel) throws InvalidPeselException {
         this(new PeselDecoder(), pesel);
     }
+
     private Pesel(PeselDecoder peselDecoder, String pesel) throws InvalidPeselException {
         PeselValidator.assertIsPeselValid(pesel);
         this.peselNumbers = new PeselNumbers(pesel);

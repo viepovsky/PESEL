@@ -5,7 +5,7 @@ import java.time.LocalDate;
 class PeselDecoder {
     LocalDate decodeBirthDate(String pesel) {
         int year = 1900;
-        int month = Integer.parseInt(pesel.substring(2,4));
+        int month = Integer.parseInt(pesel.substring(2, 4));
         int day = Integer.parseInt(pesel.substring(4, 6));
 
         int monthFirstDigit = Character.getNumericValue(pesel.charAt(2));

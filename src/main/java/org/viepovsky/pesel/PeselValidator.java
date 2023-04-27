@@ -3,7 +3,7 @@ package org.viepovsky.pesel;
 import java.time.DateTimeException;
 
 public class PeselValidator {
-    private static final int [] CONTROL_WAGES = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+    private static final int[] CONTROL_WAGES = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     private static final PeselDecoder PESEL_DECODER = new PeselDecoder();
 
     public static boolean isPeselValid(String pesel) {
@@ -14,9 +14,13 @@ public class PeselValidator {
             return false;
         }
     }
+
     public static void assertIsPeselValid(String pesel) throws InvalidPeselException {
+        if (pesel == null) {
+            throw new InvalidPeselException("PESEL cannot be null");
+        }
         if (pesel.length() != 11) {
-            throw new InvalidPeselException("Wrong PESEL length.");
+            throw new InvalidPeselException("PESEL length must be 11.");
         }
         if (!pesel.matches("[0-9]*")) {
             throw new InvalidPeselException("PESEL can contain only digits.");
@@ -45,7 +49,7 @@ public class PeselValidator {
         return controlDigit == (10 - controlSum);
     }
 
-     private static boolean isBirthDateValid(String pesel) {
+    private static boolean isBirthDateValid(String pesel) {
         try {
             PESEL_DECODER.decodeBirthDate(pesel);
             return true;
