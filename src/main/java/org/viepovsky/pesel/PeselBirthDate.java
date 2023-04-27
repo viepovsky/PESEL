@@ -7,4 +7,8 @@ class PeselBirthDate {
     private int month;
     private int day;
     private LocalDate date;
+    private PeselNumbers peselNumbers;
+    PeselBirthDate(String pesel) {
+
+    }
 }
