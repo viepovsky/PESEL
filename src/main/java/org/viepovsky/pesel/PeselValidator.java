@@ -2,7 +2,7 @@ package org.viepovsky.pesel;
 
 import java.time.DateTimeException;
 
-public class PeselValidator {
+public abstract class PeselValidator {
     private static final int[] CONTROL_WAGES = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     private static final PeselDecoder PESEL_DECODER = new PeselDecoder();
 

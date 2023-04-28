@@ -93,10 +93,10 @@ class PeselTest {
     void should_get_correct_pesel_numbers() throws InvalidPeselException {
         var pesel = new Pesel("74040152795");
 
-        int retrievedBirthDate = pesel.getPeselNumbers().getBirthDate();
-        int retrievedRandom = pesel.getPeselNumbers().getRandom();
-        int retrievedGender = pesel.getPeselNumbers().getGender();
-        int retrievedControl = pesel.getPeselNumbers().getControl();
+        int retrievedBirthDate = pesel.getBirthDateNumbers();
+        int retrievedRandom = pesel.getSerialNumbers();
+        int retrievedGender = pesel.getGenderNumber();
+        int retrievedControl = pesel.getControlNumber();
 
         assertEquals(740401, retrievedBirthDate);
         assertEquals(527, retrievedRandom);
