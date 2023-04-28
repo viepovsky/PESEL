@@ -2,30 +2,31 @@ package org.viepovsky.pesel;
 
 class PeselNumbers {
     private final int birthDate;
-    private final int random;
+    private final int serial;
     private final int gender;
     private final int control;
 
-    PeselNumbers(String pesel) {
+    PeselNumbers(String pesel) throws InvalidPeselException {
+        PeselValidator.assertIsValid(pesel);
         birthDate = Integer.parseInt(pesel.substring(0, 6));
-        random = Integer.parseInt(pesel.substring(6, 9));
+        serial = Integer.parseInt(pesel.substring(6, 9));
         gender = Character.getNumericValue(pesel.charAt(9));
         control = Character.getNumericValue(pesel.charAt(10));
     }
 
-    public int getBirthDate() {
+    public int getBirthDateNumbers() {
         return birthDate;
     }
 
-    public int getRandom() {
-        return random;
+    public int getSerialNumbers() {
+        return serial;
     }
 
-    public int getGender() {
+    public int getGenderNumber() {
         return gender;
     }
 
-    public int getControl() {
+    public int getControlNumber() {
         return control;
     }
 }

@@ -2,18 +2,16 @@ package org.viepovsky.pesel;
 
 import java.time.LocalDate;
 
-public class Pesel {
+public class Pesel extends PeselNumbers{
     private final LocalDate birthDate;
     private final Gender gender;
-    private final PeselNumbers peselNumbers;
 
     public Pesel(String pesel) throws InvalidPeselException {
         this(new PeselDecoder(), pesel);
     }
 
     private Pesel(PeselDecoder peselDecoder, String pesel) throws InvalidPeselException {
-        PeselValidator.assertIsValid(pesel);
-        this.peselNumbers = new PeselNumbers(pesel);
+        super(pesel);
         this.birthDate = peselDecoder.decodeBirthDate(pesel);
         this.gender = peselDecoder.decodeGender(pesel);
     }
@@ -26,9 +24,6 @@ public class Pesel {
         return birthDate;
     }
 
-    public PeselNumbers getPeselNumbers() {
-        return peselNumbers;
-    }
     enum Gender {
         MALE,
         FEMALE
