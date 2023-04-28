@@ -23,9 +23,9 @@ public abstract class PeselValidator {
         assertIsBirthDateValid(pesel);
     }
 
-    static void assertIsNotNull(String pesel) throws InvalidPeselException {
+    static void assertIsNotNull(String pesel) {
         if (pesel == null) {
-            throw new InvalidPeselException("PESEL cannot be null");
+            throw new NullPointerException("PESEL cannot be null");
         }
     }
 
