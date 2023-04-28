@@ -2,7 +2,7 @@ package org.viepovsky.pesel;
 
 import java.time.LocalDate;
 
-public class Pesel extends PeselNumbers{
+public class Pesel extends PeselNumbers {
     private final LocalDate birthDate;
     private final Gender gender;
 
@@ -12,6 +12,7 @@ public class Pesel extends PeselNumbers{
 
     private Pesel(PeselDecoder peselDecoder, String pesel) throws InvalidPeselException {
         super(pesel);
+        PeselValidator.assertIsValid(pesel);
         this.birthDate = peselDecoder.decodeBirthDate(pesel);
         this.gender = peselDecoder.decodeGender(pesel);
     }

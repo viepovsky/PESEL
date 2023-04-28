@@ -7,7 +7,10 @@ class PeselNumbers {
     private final int control;
 
     PeselNumbers(String pesel) throws InvalidPeselException {
-        PeselValidator.assertIsValid(pesel);
+        PeselValidator.assertIsNotNull(pesel);
+        PeselValidator.assertIsLengthValid(pesel);
+        PeselValidator.assertIsOnlyDigits(pesel);
+
         birthDate = Integer.parseInt(pesel.substring(0, 6));
         serial = Integer.parseInt(pesel.substring(6, 9));
         gender = Character.getNumericValue(pesel.charAt(9));

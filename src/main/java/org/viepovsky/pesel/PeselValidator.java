@@ -16,20 +16,34 @@ public abstract class PeselValidator {
     }
 
     public static void assertIsValid(String pesel) throws InvalidPeselException {
+        assertIsNotNull(pesel);
+        assertIsLengthValid(pesel);
+        assertIsOnlyDigits(pesel);
+        assertIsControlDigitValid(pesel);
+        assertIsBirthDateValid(pesel);
+    }
+
+    static void assertIsNotNull(String pesel) throws InvalidPeselException {
         if (pesel == null) {
             throw new InvalidPeselException("PESEL cannot be null");
         }
+    }
+
+    static void assertIsLengthValid(String pesel) throws InvalidPeselException {
         if (pesel.length() != 11) {
             throw new InvalidPeselException("PESEL length is invalid");
         }
+    }
+
+    static void assertIsOnlyDigits(String pesel) throws InvalidPeselException {
         if (!pesel.matches("[0-9]*")) {
             throw new InvalidPeselException("PESEL contains invalid characters");
         }
+    }
+
+    static void assertIsControlDigitValid(String pesel) throws InvalidPeselException {
         if (!isControlDigitValid(pesel)) {
             throw new InvalidPeselException("PESEL control sum number is invalid");
-        }
-        if (!isBirthDateValid(pesel)) {
-            throw new InvalidPeselException("PESEL birth date is invalid");
         }
     }
 
@@ -47,6 +61,12 @@ public abstract class PeselValidator {
             return controlDigit == (10 - Character.getNumericValue(String.valueOf(controlSum).charAt(1)));
         }
         return controlDigit == (10 - controlSum);
+    }
+
+    static void assertIsBirthDateValid(String pesel) throws InvalidPeselException {
+        if (!isBirthDateValid(pesel)) {
+            throw new InvalidPeselException("PESEL birth date is invalid");
+        }
     }
 
     private static boolean isBirthDateValid(String pesel) {
