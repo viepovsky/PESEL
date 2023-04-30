@@ -14,6 +14,8 @@ import java.time.DateTimeException;
  * Passing a {@code null} argument will cause a {@link NullPointerException} to be thrown.
  * Passing an invalid PESEL to assertIsValid method will cause
  * an {@link InvalidPeselException} to be thrown.
+ *
+ * @author Oskar Rajzner
  */
 public abstract class PeselValidator {
     /**

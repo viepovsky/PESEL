@@ -2,7 +2,19 @@ package org.viepovsky.pesel;
 
 import java.time.LocalDate;
 
+/**
+ * The {@code PeselDecoder} class decodes the date of birth and gender from PESEL
+ * (Polish Personal Identification Number). This class is package-private
+ * and is not intended for use outside of the org.viepovsky.pesel package.
+ *
+ * @author Oskar Rajzner
+ */
 class PeselDecoder {
+    /**
+     * Decodes the date of birth from given PESEL.
+     * @param pesel the PESEL number
+     * @return the date of birth as a LocalDate object
+     */
     LocalDate decodeBirthDate(String pesel) {
         int year = 1900;
         int month = Integer.parseInt(pesel.substring(2, 4));
@@ -32,6 +44,11 @@ class PeselDecoder {
         return LocalDate.of(year, month, day);
     }
 
+    /**
+     * Decodes the gender from given PESEL.
+     * @param pesel the PESEL number
+     * @return the gender as a Pese.Gender enum
+     */
     Pesel.Gender decodeGender(String pesel) {
         int genderDigit = Character.getNumericValue(pesel.charAt(9));
         return genderDigit % 2 == 0 ? Pesel.Gender.FEMALE : Pesel.Gender.MALE;
