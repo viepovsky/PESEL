@@ -1,4 +1,4 @@
-package org.viepovsky.pesel;
+package com.viepovsky.pesel;
 
 /**
  * The {@code PeselNumbers} class holds the digits of a PESEL number as fields. Each field

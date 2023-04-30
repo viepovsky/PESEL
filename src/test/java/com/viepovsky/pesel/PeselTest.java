@@ -1,4 +1,4 @@
-package org.viepovsky.pesel;
+package com.viepovsky.pesel;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -15,15 +15,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class PeselTest {
+    @Test
+    void should_throw_exception_if_given_pesel_is_null() {
+        assertThrows(NullPointerException.class, () -> new Pesel(null));
+    }
+
     @ParameterizedTest
     @MethodSource("provideInvalidPesels")
-    void pesel_should_throw_exception_when_given_pesel_is_invalid(String givenPesel) {
+    void should_throw_exception_if_given_pesel_is_invalid(String givenPesel) {
         assertThrows(InvalidPeselException.class, () -> new Pesel(givenPesel));
     }
 
     private static Stream<Arguments> provideInvalidPesels() {
         return Stream.of(
-                null,
                 Arguments.of("string"),
                 Arguments.of("85122496612s"),
                 Arguments.of("8512249661S"),
@@ -35,7 +39,7 @@ class PeselTest {
 
     @ParameterizedTest
     @MethodSource("providePesels")
-    void pesel_should_return_correct_birth_date(String givenParam, LocalDate expectedDate) throws InvalidPeselException {
+    void should_return_correct_birth_date(String givenParam, LocalDate expectedDate) throws InvalidPeselException {
         var pesel = new Pesel(givenParam);
         assertEquals(expectedDate, pesel.getBirthDate());
     }
@@ -50,7 +54,7 @@ class PeselTest {
                 Arguments.of("58283175999", LocalDate.of(2058, 8, 31)),
                 Arguments.of("58483175995", LocalDate.of(2158, 8, 31)),
                 Arguments.of("58683175991", LocalDate.of(2258, 8, 31))
-                );
+        );
     }
 
     @ParameterizedTest
@@ -66,9 +70,9 @@ class PeselTest {
             "81122018287",
             "64031643742"
     })
-    void pesel_should_return_gender_female(String givenPesel) throws InvalidPeselException {
+    void should_return_gender_female(String givenPesel) throws InvalidPeselException {
         var pesel = new Pesel(givenPesel);
-        assertEquals(Pesel.Gender.FEMALE, pesel.getGender());
+        assertEquals(Pesel.Gender.FEMALE.toString(), pesel.getGender());
     }
 
     @ParameterizedTest
@@ -84,9 +88,9 @@ class PeselTest {
             "66020829795",
             "74040152795"
     })
-    void pesel_should_return_gender_male(String givenPesel) throws InvalidPeselException {
+    void should_return_gender_male(String givenPesel) throws InvalidPeselException {
         var pesel = new Pesel(givenPesel);
-        assertEquals(Pesel.Gender.MALE, pesel.getGender());
+        assertEquals(Pesel.Gender.MALE.toString(), pesel.getGender());
     }
 
     @Test
@@ -105,13 +109,13 @@ class PeselTest {
     }
 
     @Test
-    void should_return_true_if_pesel_valid_and_false_if_pesel_invalid() {
+    void should_return_true_if_pesel_is_valid_and_false_if_pesel_is_invalid() {
         assertTrue(PeselValidator.isValid("78010469227"));
         assertFalse(PeselValidator.isValid("78010469225"));
     }
 
     @Test
-    void should_throw_exception_if_pesel_invalid(){
+    void should_throw_exception_if_pesel_is_invalid() {
         assertThrows(InvalidPeselException.class, () -> PeselValidator.assertIsValid("78010469225"));
     }
 }

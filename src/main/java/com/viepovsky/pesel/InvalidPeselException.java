@@ -1,4 +1,4 @@
-package org.viepovsky.pesel;
+package com.viepovsky.pesel;
 
 /**
  * Checked exception thrown when an invalid PESEL number is encountered.

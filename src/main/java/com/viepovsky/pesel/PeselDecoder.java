@@ -1,4 +1,4 @@
-package org.viepovsky.pesel;
+package com.viepovsky.pesel;
 
 import java.time.LocalDate;
 
