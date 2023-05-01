@@ -1,4 +1,4 @@
-package com.viepovsky.pesel;
+package io.github.viepovsky.polishutils.pesel;
 
 import java.time.DateTimeException;
 

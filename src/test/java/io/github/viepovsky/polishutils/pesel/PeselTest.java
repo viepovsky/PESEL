@@ -1,4 +1,4 @@
-package com.viepovsky.pesel;
+package io.github.viepovsky.polishutils.pesel;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

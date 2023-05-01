@@ -1,4 +1,4 @@
-package com.viepovsky.pesel;
+package io.github.viepovsky.polishutils.pesel;
 
 /**
  * Checked exception thrown when an invalid PESEL number is encountered.

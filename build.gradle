@@ -1,9 +1,11 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
-group 'org.viepovsky.pesel'
-version '1.0-SNAPSHOT'
+group 'io.github.viepovsky'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -17,4 +19,69 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'io.github.viepovsky'
+            artifactId = 'pesel'
+            version = "1.0"
+            from components.java
+
+            pom {
+                name = 'PESEL'
+                description = 'Library for validating and decoding PESEL'
+                url = 'https://github.com/viepovsky/PESEL'
+                inceptionYear = '2023'
+
+
+                licenses {
+                    license {
+                        name = 'The MIT License'
+                        url = 'https://opensource.org/license/mit/'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'viepovsky'
+                        name = 'Oskar Rajzner'
+                        email = 'o.rajzner@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/viepovsky/PESEL.git'
+                    developerConnection = 'scm:git:ssh:https://github.com/viepovsky/PESEL.git'
+                    url = 'https://github.com/viepovsky/PESEL'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "OSSRH"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = project.properties["ossrhUsername"]
+                password = project.properties["ossrhPassword"]
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
