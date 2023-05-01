@@ -12,6 +12,29 @@ and `X` digit determines the person's gender: odd are assigned to males, even to
 The last digit `Q` is a control sum number that verifies whether a given PESEL is correct or not.
 You can read more about PESEL [**here**](https://en.wikipedia.org/wiki/PESEL)
 
+
+## Installation
+
+To use this PESEL validation library in your Java project, you can add the dependency to your build tool.
+
+For Gradle, add the following line to your build.gradle file:
+
+```java
+implementation 'io.github.viepovsky:pesel:1.0'
+```
+
+For Maven, add the following code to your pom.xml file:
+
+```java
+<dependency>
+    <groupId>io.github.viepovsky</groupId>
+    <artifactId>pesel</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+After adding the dependency, you can start using the PESEL validation library in your project.
+
 ## Usage
 
 ### Validation of PESEL number
