@@ -79,6 +79,14 @@ public class PeselGeneratorParams {
         return maxDate;
     }
 
+    static LocalDate getDefaultMinDate() {
+        return DEFAULT_MIN_DATE;
+    }
+
+    static LocalDate getDefaultMaxDate() {
+        return DEFAULT_MAX_DATE;
+    }
+
     public enum Gender {
         MALE,
         FEMALE

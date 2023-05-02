@@ -36,11 +36,11 @@ public class PeselGeneratorTest {
 
     private static Stream<Arguments> providePesels() {
         return Stream.of(
-                Arguments.of(LocalDate.of(2200,1,1), LocalDate.of(2299,12,31)),
-                Arguments.of(LocalDate.of(2100,1,1), LocalDate.of(2199,12,31)),
-                Arguments.of(LocalDate.of(2000,1,1), LocalDate.of(2099,12,31)),
-                Arguments.of(LocalDate.of(1900,1,1), LocalDate.of(1999,12,31)),
-                Arguments.of(LocalDate.of(1800,1,1), LocalDate.of(1899,12,31))
+                Arguments.of(LocalDate.of(2200, 1, 1), LocalDate.of(2299, 12, 31)),
+                Arguments.of(LocalDate.of(2100, 1, 1), LocalDate.of(2199, 12, 31)),
+                Arguments.of(LocalDate.of(2000, 1, 1), LocalDate.of(2099, 12, 31)),
+                Arguments.of(LocalDate.of(1900, 1, 1), LocalDate.of(1999, 12, 31)),
+                Arguments.of(LocalDate.of(1800, 1, 1), LocalDate.of(1899, 12, 31))
         );
     }
 
@@ -89,13 +89,13 @@ public class PeselGeneratorTest {
 
     @Test
     void should_throw_exception_if_given_minDate_is_invalid() {
-        LocalDate minDate = LocalDate.of(2300,1,1);
+        LocalDate minDate = LocalDate.of(2300, 1, 1);
         assertThrows(IllegalArgumentException.class, () -> PeselGeneratorParams.builder().minDate(minDate));
     }
 
     @Test
     void should_throw_exception_if_given_maxDate_is_invalid() {
-        LocalDate maxDate = LocalDate.of(1799,12,31);
+        LocalDate maxDate = LocalDate.of(1799, 12, 31);
         assertThrows(IllegalArgumentException.class, () -> PeselGeneratorParams.builder().maxDate(maxDate));
     }
 
@@ -115,7 +115,7 @@ public class PeselGeneratorTest {
 
     @RepeatedTest(100)
     void should_generate_correct_pesel_if_only_min_param_is_given() throws InvalidPeselException {
-        LocalDate minDate = LocalDate.of(2200,1,1);
+        LocalDate minDate = LocalDate.of(2200, 1, 1);
         var params = PeselGeneratorParams.builder()
                 .minDate(minDate)
                 .build();
@@ -127,12 +127,12 @@ public class PeselGeneratorTest {
         assertNotNull(generatedPesel);
         assertTrue(PeselValidator.isValid(generatedPesel));
         assertTrue(pesel.getBirthDate().plusDays(1).isAfter(minDate));
-        assertTrue(pesel.getBirthDate().minusDays(1).isBefore(LocalDate.of(2299,12,31)));
+        assertTrue(pesel.getBirthDate().minusDays(1).isBefore(LocalDate.of(2299, 12, 31)));
     }
 
     @RepeatedTest(100)
     void should_generate_correct_pesel_if_only_max_param_is_given() throws InvalidPeselException {
-        LocalDate maxDate = LocalDate.of(2200,1,1);
+        LocalDate maxDate = LocalDate.of(2200, 1, 1);
         var params = PeselGeneratorParams.builder()
                 .maxDate(maxDate)
                 .build();
@@ -143,14 +143,14 @@ public class PeselGeneratorTest {
 
         assertNotNull(generatedPesel);
         assertTrue(PeselValidator.isValid(generatedPesel));
-        assertTrue(pesel.getBirthDate().plusDays(1).isAfter(LocalDate.of(1800,1,1)));
+        assertTrue(pesel.getBirthDate().plusDays(1).isAfter(LocalDate.of(1800, 1, 1)));
         assertTrue(pesel.getBirthDate().minusDays(1).isBefore(maxDate));
     }
 
     @Test
     void should_generate_pesel_with_given_date() throws InvalidPeselException {
-        LocalDate minDate = LocalDate.of(1955,11,22);
-        LocalDate maxDate = LocalDate.of(1955,11,22);
+        LocalDate minDate = LocalDate.of(1955, 11, 22);
+        LocalDate maxDate = LocalDate.of(1955, 11, 22);
         var params = PeselGeneratorParams.builder()
                 .maxDate(maxDate)
                 .minDate(minDate)
@@ -163,5 +163,12 @@ public class PeselGeneratorTest {
         assertNotNull(generatedPesel);
         assertTrue(PeselValidator.isValid(generatedPesel));
         assertEquals(pesel.getBirthDate(), minDate);
+    }
+
+    @RepeatedTest(100)
+    void should_generate_pesel_from_static_method() {
+        String generatedPesel = PeselGenerator.generatePeselStatic();
+
+        assertTrue(PeselValidator.isValid(generatedPesel));
     }
 }

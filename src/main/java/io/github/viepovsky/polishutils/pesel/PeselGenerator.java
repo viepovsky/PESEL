@@ -8,7 +8,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class PeselGenerator {
     private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     private static final Random RANDOM = new Random();
-    private PeselGeneratorParams.Gender gender;
+    private static PeselGeneratorParams.Gender gender;
     private LocalDate minDate;
     private LocalDate maxDate;
 
@@ -18,20 +18,30 @@ public class PeselGenerator {
         maxDate = params.getMaxDate();
     }
 
+    public static String generatePeselStatic() {
+        LocalDate minDate = PeselGeneratorParams.getDefaultMinDate();
+        LocalDate maxDate = PeselGeneratorParams.getDefaultMaxDate();
+        return generatePesel(minDate, maxDate);
+    }
+
     public String generatePesel() {
-        String birthDateDigits = getBirthDateDigit();
+        return generatePesel(minDate, maxDate);
+    }
+
+    private static String generatePesel(LocalDate minDate, LocalDate maxDate) {
+        String birthDateDigits = getBirthDateDigit(minDate, maxDate);
         String randomSerialDigits = getRandomSerialDigits();
         String genderDigit = getGenderRandomDigit();
         String controlDigit = getControlDigit(birthDateDigits, randomSerialDigits, genderDigit);
         return birthDateDigits + randomSerialDigits + genderDigit + controlDigit;
     }
 
-    private String getBirthDateDigit() {
+    private static String getBirthDateDigit(LocalDate minDate, LocalDate maxDate) {
         LocalDate birthDate = getRandomBirthDate(minDate, maxDate);
         return encodeBirthDate(birthDate);
     }
 
-    String encodeBirthDate(LocalDate birthDate) {
+    private static String encodeBirthDate(LocalDate birthDate) {
         int year = birthDate.getYear();
         int month = birthDate.getMonthValue();
         int day = birthDate.getDayOfMonth();
@@ -62,16 +72,16 @@ public class PeselGenerator {
         return encodedBirthDate;
     }
 
-    private LocalDate getRandomBirthDate(LocalDate minDate, LocalDate maxDate) {
+    private static LocalDate getRandomBirthDate(LocalDate minDate, LocalDate maxDate) {
         long days = DAYS.between(minDate, maxDate);
         return minDate.plusDays(RANDOM.nextLong(days + 1));
     }
 
-    private String getRandomSerialDigits() {
+    private static String getRandomSerialDigits() {
         return String.valueOf(RANDOM.nextInt(10)) + RANDOM.nextInt(10) + RANDOM.nextInt(10);
     }
 
-    private String getGenderRandomDigit() {
+    private static String getGenderRandomDigit() {
         if (!isGenderGiven()) {
             setRandomGender();
             String genderDigit = checkGenderAndEncodeDigit();
@@ -81,7 +91,7 @@ public class PeselGenerator {
         return checkGenderAndEncodeDigit();
     }
 
-    private String checkGenderAndEncodeDigit() {
+    private static String checkGenderAndEncodeDigit() {
         if (gender.equals(PeselGeneratorParams.Gender.FEMALE)) {
             return encodeRandomFemaleDigit();
         } else {
@@ -89,23 +99,23 @@ public class PeselGenerator {
         }
     }
 
-    private boolean isGenderGiven() {
+    private static boolean isGenderGiven() {
         return gender != null;
     }
 
-    private void setRandomGender() {
+    private static void setRandomGender() {
         gender = RANDOM.nextInt(10) % 2 == 0 ? PeselGeneratorParams.Gender.FEMALE : PeselGeneratorParams.Gender.MALE;
     }
 
-    private String encodeRandomFemaleDigit() {
+    private static String encodeRandomFemaleDigit() {
         return String.valueOf(RANDOM.nextInt(5) * 2);
     }
 
-    private String encodeRandomMaleDigit() {
+    private static String encodeRandomMaleDigit() {
         return String.valueOf(RANDOM.nextInt(5) * 2 + 1);
     }
 
-    private String getControlDigit(String birthDateDigits, String randomSerialDigits, String genderDigit) {
+    private static String getControlDigit(String birthDateDigits, String randomSerialDigits, String genderDigit) {
         String pesel = birthDateDigits + randomSerialDigits + genderDigit;
         int controlSum = 0;
         for (int i = 0; i < 10; i++) {
