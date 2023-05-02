@@ -21,7 +21,7 @@ public abstract class PeselValidator {
     /**
      * Digits weight for checking the validity of the PESEL
      */
-    private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+    private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
     /**
      * An instance of the {@code PeselDecoder} class.
      */
@@ -29,6 +29,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if given PESEL is valid.
+     *
      * @param pesel the PESEL number
      * @return true if the given PESEL is valid, false otherwise
      */
@@ -43,6 +44,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if given PESEL is valid.
+     *
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
@@ -56,6 +58,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if given PESEL is null.
+     *
      * @param pesel the PESEL number
      * @throws NullPointerException if given PESEL is null
      */
@@ -67,6 +70,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if given PESEL has length of 11.
+     *
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL length is other than 11
      */
@@ -78,6 +82,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if given PESEL has only digits.
+     *
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL has other characters than digits
      */
@@ -89,6 +94,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if control digit is valid.
+     *
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL has invalid control number
      */
@@ -100,27 +106,24 @@ public abstract class PeselValidator {
 
     /**
      * Checks if control digit is valid.
+     *
      * @param pesel the PESEL number
      * @return true if the given PESEL control digit is valid, false otherwise
      */
     private static boolean isControlDigitValid(String pesel) {
-        int controlSum = 0, controlDigit = Character.getNumericValue(pesel.charAt(10));
-        for (int i = 0; i < 10; i++) {
-            int multiplyNumber = CONTROL_WEIGHTS[i] * Character.getNumericValue(pesel.charAt(i));
-            if (multiplyNumber >= 10) {
-                controlSum += Character.getNumericValue(String.valueOf(multiplyNumber).charAt(1));
-            } else {
-                controlSum += multiplyNumber;
-            }
+        int sum = 0;
+        for (int i = 0; i <= 10; i++) {
+            int multipliedNumber = CONTROL_WEIGHTS[i] * Character.getNumericValue(pesel.charAt(i));
+            sum += multipliedNumber;
         }
-        if (controlSum >= 10) {
-            return controlDigit == (10 - Character.getNumericValue(String.valueOf(controlSum).charAt(1)));
-        }
-        return controlDigit == (10 - controlSum);
+        String controlSum = String.valueOf(sum);
+        int lastDigit = Integer.parseInt(controlSum.substring(controlSum.length() - 1));
+        return lastDigit == 0;
     }
 
     /**
      * Checks if the date of virth is valid.
+     *
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL date of birth is invalid
      */
@@ -132,6 +135,7 @@ public abstract class PeselValidator {
 
     /**
      * Checks if the date of birth is valid.
+     *
      * @param pesel the PESEL number
      * @return true if the given PESEL date of birth is valid, false otherwise
      */
