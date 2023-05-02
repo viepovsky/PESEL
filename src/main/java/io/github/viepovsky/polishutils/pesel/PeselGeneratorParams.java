@@ -5,32 +5,36 @@ import java.time.LocalDate;
 public class PeselGeneratorParams {
     private static final LocalDate DEFAULT_MIN_DATE = LocalDate.of(1800,1,1);
     private static final LocalDate DEFAULT_MAX_DATE = LocalDate.of(2299, 12, 31);
-    private Pesel.Gender gender;
+    private Gender gender;
     private LocalDate minDate = DEFAULT_MIN_DATE;
     private LocalDate maxDate = DEFAULT_MAX_DATE;
 
-    private PeselGeneratorParams(PeselGeneratorParamsBuilder builder) {
+    private PeselGeneratorParams(Builder builder) {
         gender = builder.gender;
         if (builder.minDate != null) minDate = builder.minDate;
         if (builder.maxDate != null) maxDate = builder.maxDate;
     }
 
-    public static final class PeselGeneratorParamsBuilder {
-        private Pesel.Gender gender;
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private Gender gender;
         private LocalDate minDate;
         private LocalDate maxDate;
 
-        public PeselGeneratorParamsBuilder withGender(Pesel.Gender gender) {
+        public Builder gender(Gender gender) {
             this.gender = gender;
             return (this);
         }
 
-        public PeselGeneratorParamsBuilder minDate(LocalDate minDate) {
+        public Builder minDate(LocalDate minDate) {
             this.minDate = minDate;
             return (this);
         }
 
-        public PeselGeneratorParamsBuilder maxDate(LocalDate maxDate) {
+        public Builder maxDate(LocalDate maxDate) {
             this.maxDate = maxDate;
             return (this);
         }
@@ -40,7 +44,7 @@ public class PeselGeneratorParams {
         }
     }
 
-    Pesel.Gender getGender() {
+    Gender getGender() {
         return gender;
     }
 
@@ -50,5 +54,10 @@ public class PeselGeneratorParams {
 
     LocalDate getMaxDate() {
         return maxDate;
+    }
+
+    public enum Gender {
+        MALE,
+        FEMALE
     }
 }

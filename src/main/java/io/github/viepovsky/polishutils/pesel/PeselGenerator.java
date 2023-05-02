@@ -10,7 +10,7 @@ public class PeselGenerator {
     private static final LocalDate DEFAULT_MIN_DATE = LocalDate.now().minusYears(100);
     private static final LocalDate DEFAULT_MAX_DATE = LocalDate.now();
     private static final Random RANDOM = new Random();
-    private Pesel.Gender gender;
+    private PeselGeneratorParams.Gender gender;
     private LocalDate minDate;
     private LocalDate maxDate;
 
@@ -24,7 +24,7 @@ public class PeselGenerator {
 
     private void validateAndChangeInputGender() {
         if (gender == null) {
-            gender = RANDOM.nextInt(10) % 2 == 0 ? Pesel.Gender.FEMALE : Pesel.Gender.MALE;
+            gender = RANDOM.nextInt(10) % 2 == 0 ? PeselGeneratorParams.Gender.FEMALE : PeselGeneratorParams.Gender.MALE;
         }
     }
 
@@ -61,7 +61,23 @@ public class PeselGenerator {
             case 22 -> month += 60;
         }
 
-        return String.valueOf(year % 100) + month + day;
+        String encodedBirthDate = "";
+        if (String.valueOf(year % 100).length() == 1) {
+            encodedBirthDate += "0" + year % 100;
+        } else {
+            encodedBirthDate += year % 100;
+        }
+        if (String.valueOf(month).length() == 1) {
+            encodedBirthDate += "0" + month;
+        } else {
+            encodedBirthDate += month;
+        }
+        if (String.valueOf(day).length() == 1) {
+            encodedBirthDate += "0" + day;
+        } else {
+            encodedBirthDate += day;
+        }
+        return encodedBirthDate;
     }
 
     private LocalDate getRandomBirthDate(LocalDate minDate, LocalDate maxDate) {
@@ -74,7 +90,7 @@ public class PeselGenerator {
     }
 
     private String getRandomGenderDigit() {
-        if (gender.equals(Pesel.Gender.FEMALE)) {
+        if (gender.equals(PeselGeneratorParams.Gender.FEMALE)) {
             return encodeRandomFemaleDigit();
         } else {
             return encodeRandomMaleDigit();
@@ -100,9 +116,11 @@ public class PeselGenerator {
                 controlSum += multipliedNumber;
             }
         }
-        if (controlSum >= 10) {
-            return String.valueOf((10 - Character.getNumericValue(String.valueOf(controlSum).charAt(1))));
+        controlSum %= 10;
+        if (controlSum == 0) {
+            return "0";
+        } else {
+            return String.valueOf(10 - controlSum);
         }
-        return String.valueOf(10 - controlSum);
     }
 }
