@@ -73,16 +73,21 @@ int control = pesel.getControlNumber();
 
 ### Generating random PESEL
 
-To generate a random PESEL, you can use the PeselGenerator class. 
-If you want to generate a PESEL with default parameters, simply use the static method `generatePeselStatic()`:
+To generate a random PESEL, you can use the `PeselGenerator` class, which provides methods to generate PESELs with either default parameters or specified ones.
+
+To generate a PESEL with default parameters, you can use the static method `generatePeselStatic()`, which generates a PESEL with the following default parameters:
+
+- Random gender
+- Date of birth between today's date and 100 years before today's date.
+
+Here is an example code snippet to generate a PESEL with default parameters:
 
 ```java
 String generatedPesel = PeselGenerator.generatePeselStatic();
 ```
-This method returns a `String` with a random PESEL.
+The `generatePeselStatic()` method returns a `String` with a random PESEL.
 
-If you want to generate a PESEL with specific parameters, you can use the `PeselGeneratorParams` class to specify the desired gender and date range. 
-For example:
+If you want to generate a PESEL with specific parameters, you can use the `PeselGeneratorParams` class to specify the desired gender and date range. For example:
 
 ```java
 LocalDate minDate = LocalDate.of(1990, 1, 1); 
@@ -99,7 +104,7 @@ PeselGenerator peselGenerator = new PeselGenerator(params);
 String generatedPesel = peselGenerator.generatePesel();
 ```
 
-This will generate a random PESEL for a female person born between January 1, 1990 and January 1, 2010. You can customize the parameters to generate a desired PESEL.
+This will generate a random PESEL for a female person born between January 1, 1990 and January 1, 2010. You can customize the parameters to generate the desired PESEL.
 
 ## Exceptions
 
@@ -109,3 +114,8 @@ The `InvalidPeselException` message includes information about the validation of
 - has invalid characters (characters other than digits)
 - has an invalid control number (e.g. is 5 but should be 7)
 - has an invalid birth date (e.g. the 32nd of any month)
+
+When using `PeselGeneratorParams`, if you pass an out-of-range date parameter, it will throw an `IllegalArgumentException`.
+This means that the minimum and maximum date should be within the valid range of PESEL, which is between January 1, 1800 and December 31, 2299. 
+If you attempt to use dates outside of this range, an exception will be thrown. 
+It is recommended to handle this exception in your code to ensure that your program runs smoothly.
