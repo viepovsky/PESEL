@@ -3,11 +3,11 @@ package io.github.viepovsky.polishutils.pesel;
 import java.time.LocalDate;
 
 public class PeselGeneratorParams {
-    private static final LocalDate DEFAULT_MIN_DATE = LocalDate.of(1800,1,1);
-    private static final LocalDate DEFAULT_MAX_DATE = LocalDate.of(2299, 12, 31);
+    private static final LocalDate MIN_DATE_POSSIBLE = LocalDate.of(1800, 1, 1);
+    private static final LocalDate MAX_DATE_POSSIBLE = LocalDate.of(2299, 12, 31);
     private Gender gender;
-    private LocalDate minDate = DEFAULT_MIN_DATE;
-    private LocalDate maxDate = DEFAULT_MAX_DATE;
+    private LocalDate minDate;
+    private LocalDate maxDate;
 
     private PeselGeneratorParams(Builder builder) {
         gender = builder.gender;
@@ -30,13 +30,21 @@ public class PeselGeneratorParams {
         }
 
         public Builder minDate(LocalDate minDate) {
-            this.minDate = minDate;
-            return (this);
+            if (minDate.isBefore(MAX_DATE_POSSIBLE.plusDays(1)) && minDate.isAfter(MIN_DATE_POSSIBLE.minusDays(1))) {
+                this.minDate = minDate;
+                return (this);
+            } else {
+                throw new IllegalArgumentException("Min and max dates should be between: " + MIN_DATE_POSSIBLE + " and " + MAX_DATE_POSSIBLE);
+            }
         }
 
         public Builder maxDate(LocalDate maxDate) {
-            this.maxDate = maxDate;
-            return (this);
+            if (maxDate.isBefore(MAX_DATE_POSSIBLE.plusDays(1)) && maxDate.isAfter(MIN_DATE_POSSIBLE.minusDays(1))) {
+                this.maxDate = maxDate;
+                return (this);
+            } else {
+                throw new IllegalArgumentException("Min and max dates should be between: " + MIN_DATE_POSSIBLE + " and " + MAX_DATE_POSSIBLE);
+            }
         }
 
         public PeselGeneratorParams build() {

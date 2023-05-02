@@ -16,16 +16,9 @@ public class PeselGenerator {
 
     public PeselGenerator(PeselGeneratorParams params) {
         gender = params.getGender();
-        validateAndChangeInputGender();
         minDate = params.getMinDate() != null ? params.getMinDate() : DEFAULT_MIN_DATE;
         maxDate = params.getMaxDate() != null ? params.getMaxDate() : DEFAULT_MAX_DATE;
         validateAndChangeInputDates();
-    }
-
-    private void validateAndChangeInputGender() {
-        if (gender == null) {
-            gender = RANDOM.nextInt(10) % 2 == 0 ? PeselGeneratorParams.Gender.FEMALE : PeselGeneratorParams.Gender.MALE;
-        }
     }
 
     private void validateAndChangeInputDates() {
@@ -39,7 +32,7 @@ public class PeselGenerator {
     public String generatePesel() {
         String birthDateDigits = getBirthDateDigit();
         String randomSerialDigits = getRandomSerialDigits();
-        String genderDigit = getRandomGenderDigit();
+        String genderDigit = getGenderRandomDigit();
         String controlDigit = getControlDigit(birthDateDigits, randomSerialDigits, genderDigit);
         return birthDateDigits + randomSerialDigits + genderDigit + controlDigit;
     }
@@ -89,12 +82,30 @@ public class PeselGenerator {
         return String.valueOf(RANDOM.nextInt(10)) + RANDOM.nextInt(10) + RANDOM.nextInt(10);
     }
 
-    private String getRandomGenderDigit() {
+    private String getGenderRandomDigit() {
+        if (!isGenderGiven()) {
+            setRandomGender();
+            String genderDigit = checkGenderAndEncodeDigit();
+            gender = null;
+            return genderDigit;
+        }
+        return checkGenderAndEncodeDigit();
+    }
+
+    private String checkGenderAndEncodeDigit() {
         if (gender.equals(PeselGeneratorParams.Gender.FEMALE)) {
             return encodeRandomFemaleDigit();
         } else {
             return encodeRandomMaleDigit();
         }
+    }
+
+    private boolean isGenderGiven() {
+        return gender != null;
+    }
+
+    private void setRandomGender() {
+        gender = RANDOM.nextInt(10) % 2 == 0 ? PeselGeneratorParams.Gender.FEMALE : PeselGeneratorParams.Gender.MALE;
     }
 
     private String encodeRandomFemaleDigit() {
