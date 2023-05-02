@@ -71,6 +71,36 @@ int gender = pesel.getGenderNumber();
 int control = pesel.getControlNumber();
 ```
 
+### Generating random PESEL
+
+To generate a random PESEL, you can use the PeselGenerator class. 
+If you want to generate a PESEL with default parameters, simply use the static method `generatePeselStatic()`:
+
+```java
+String generatedPesel = PeselGenerator.generatePeselStatic();
+```
+This method returns a `String` with a random PESEL.
+
+If you want to generate a PESEL with specific parameters, you can use the `PeselGeneratorParams` class to specify the desired gender and date range. 
+For example:
+
+```java
+LocalDate minDate = LocalDate.of(1990, 1, 1); 
+LocalDate maxDate = LocalDate.of(2010, 1, 1);
+PeselGeneratorParams.Gender gender = PeselGeneratorParams.Gender.FEMALE;
+
+PeselGeneratorParams params = PeselGeneratorParams.builder()
+        .gender(gender)
+        .minDate(minDate)
+        .maxDate(maxDate)
+        .build();
+        
+PeselGenerator peselGenerator = new PeselGenerator(params);
+String generatedPesel = peselGenerator.generatePesel();
+```
+
+This will generate a random PESEL for a female person born between January 1, 1990 and January 1, 2010. You can customize the parameters to generate a desired PESEL.
+
 ## Exceptions
 
 When using `Pesel` or PeselValidator to validate, they may throw an exception if the given parameter is `null` (a `NullPointerException`), or if the given PESEL is invalid (an `InvalidPeselException`).
