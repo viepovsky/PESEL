@@ -5,14 +5,29 @@ import java.time.LocalDate;
 public class PeselGeneratorParams {
     private static final LocalDate MIN_DATE_POSSIBLE = LocalDate.of(1800, 1, 1);
     private static final LocalDate MAX_DATE_POSSIBLE = LocalDate.of(2299, 12, 31);
+    private static final LocalDate DEFAULT_MIN_DATE = LocalDate.now().minusYears(100);
+    private static final LocalDate DEFAULT_MAX_DATE = LocalDate.now();
     private Gender gender;
     private LocalDate minDate;
     private LocalDate maxDate;
 
     private PeselGeneratorParams(Builder builder) {
         gender = builder.gender;
-        if (builder.minDate != null) minDate = builder.minDate;
-        if (builder.maxDate != null) maxDate = builder.maxDate;
+        if (builder.minDate != null && builder.maxDate != null) {
+            minDate = builder.minDate;
+            maxDate = builder.maxDate;
+        } else if (builder.minDate == null && builder.maxDate == null) {
+            minDate = DEFAULT_MIN_DATE;
+            maxDate = DEFAULT_MAX_DATE;
+        } else {
+            minDate = builder.minDate == null ? MIN_DATE_POSSIBLE : builder.minDate;
+            maxDate = builder.maxDate == null ? MAX_DATE_POSSIBLE : builder.maxDate;
+        }
+        if (minDate.isAfter(maxDate)) {
+            LocalDate tempDate = minDate;
+            minDate = maxDate;
+            maxDate = tempDate;
+        }
     }
 
     public static Builder builder() {

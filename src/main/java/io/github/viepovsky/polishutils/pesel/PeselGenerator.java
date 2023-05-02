@@ -7,8 +7,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class PeselGenerator {
     private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
-    private static final LocalDate DEFAULT_MIN_DATE = LocalDate.now().minusYears(100);
-    private static final LocalDate DEFAULT_MAX_DATE = LocalDate.now();
     private static final Random RANDOM = new Random();
     private PeselGeneratorParams.Gender gender;
     private LocalDate minDate;
@@ -16,17 +14,8 @@ public class PeselGenerator {
 
     public PeselGenerator(PeselGeneratorParams params) {
         gender = params.getGender();
-        minDate = params.getMinDate() != null ? params.getMinDate() : DEFAULT_MIN_DATE;
-        maxDate = params.getMaxDate() != null ? params.getMaxDate() : DEFAULT_MAX_DATE;
-        validateAndChangeInputDates();
-    }
-
-    private void validateAndChangeInputDates() {
-        if (minDate.isAfter(maxDate)) {
-            LocalDate tempDate = minDate;
-            minDate = maxDate;
-            maxDate = tempDate;
-        }
+        minDate = params.getMinDate();
+        maxDate = params.getMaxDate();
     }
 
     public String generatePesel() {
