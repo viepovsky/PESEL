@@ -111,6 +111,7 @@ class PeselTest {
     @Test
     void should_return_true_if_pesel_is_valid_and_false_if_pesel_is_invalid() {
         assertTrue(PeselValidator.isValid("78010469227"));
+        assertTrue(PeselValidator.isValid("73673198930"));
         assertFalse(PeselValidator.isValid("78010469225"));
     }
 

@@ -47,7 +47,7 @@ class PeselDecoder {
     /**
      * Decodes the gender from given PESEL.
      * @param pesel the PESEL number
-     * @return the gender as a Pese.Gender enum
+     * @return the gender as a Pesel.Gender enum
      */
     Pesel.Gender decodeGender(String pesel) {
         int genderDigit = Character.getNumericValue(pesel.charAt(9));
