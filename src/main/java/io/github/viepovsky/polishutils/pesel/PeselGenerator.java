@@ -30,11 +30,12 @@ import static java.time.temporal.ChronoUnit.DAYS;
  *
  *     PeselGenerator peselGenerator = new PeselGenerator(params);
  *     String generatedPesel = peselGenerator.generatePesel();
- *     //generates random PESEL for a female person born between January 1, 1990 and January 1, 2010
+ * //generates random PESEL for a female person born between January 1, 1990 and January 1, 2010
  * </pre></blockquote>
  * Passing a {@code null} argument to a constructor will cause a {@link NullPointerException} to be thrown.
  *
  * @author Oskar Rajzner
+ * @see PeselGeneratorParams
  */
 public class PeselGenerator {
     /**
@@ -246,9 +247,9 @@ public class PeselGenerator {
     /**
      * Calculates and returns the correct control digit for a generated PESEL number.
      *
-     * @param birthDateDigits the birth date digits of the PESEL as a string
+     * @param birthDateDigits    the birth date digits of the PESEL as a string
      * @param randomSerialDigits the random serial digits of the PESEL as a string
-     * @param genderDigit the gender digit of the PESEL as a string
+     * @param genderDigit        the gender digit of the PESEL as a string
      * @return the calculated control digit of the PESEL as a string
      */
     private static String getControlDigit(String birthDateDigits, String randomSerialDigits, String genderDigit) {
