@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'io.github.viepovsky'
-version '1.0'
+version '2.0.0'
 
 repositories {
     mavenCentral()
@@ -31,12 +31,12 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = 'io.github.viepovsky'
             artifactId = 'pesel'
-            version = "1.0"
+            version = "2.0.0"
             from components.java
 
             pom {
                 name = 'PESEL'
-                description = 'Library for validating and decoding PESEL'
+                description = 'Library for validating, decoding and generating PESEL'
                 url = 'https://github.com/viepovsky/PESEL'
                 inceptionYear = '2023'
 

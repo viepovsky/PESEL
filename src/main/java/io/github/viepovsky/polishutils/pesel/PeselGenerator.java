@@ -74,8 +74,10 @@ public class PeselGenerator {
      * Generates a random PESEL number with default parameters.
      * <p>
      * The default parameters are as follows:
-     * <li>Random gender</li>
-     * <li>Date of birth between today's date and 100 years before today's date.</li>
+     * <p>
+     * - Random gender
+     * <p>
+     * - Date of birth between today's date and 100 years before today's date.
      *
      * @return a randomly generated PESEL number as a string value
      */
