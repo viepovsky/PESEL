@@ -1,4 +1,6 @@
 # PESEL
+[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.0)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.0/overview)
+[![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://opensource.org/license/mit/)
 
 ## Description
 
