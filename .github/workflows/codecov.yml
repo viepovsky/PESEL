@@ -21,7 +21,8 @@ jobs:
       
     - name: jacoco
       run: ./gradlew test jacocoTestReport
-    
+      
+    - uses: actions/checkout@master
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3.1.3
       with:
