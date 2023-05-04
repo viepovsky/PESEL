@@ -1,7 +1,5 @@
 name: Coveralls
 
-env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 on:
   push:
     branches: [master]
@@ -18,7 +16,14 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+        
     - name: Build and Test with Gradle
       run: ./gradlew build
+      
+    - name: jacoco
+      run: ./gradlew jacocoTestCoverageVerification
+
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
