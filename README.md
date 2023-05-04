@@ -4,8 +4,6 @@
 [![Codecov coverage](https://img.shields.io/codecov/c/github/viepovsky/PESEL?style=plastic)](https://codecov.io/github/viepovsky/PESEL)
 [![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://github.com/viepovsky/PESEL/blob/master/LICENSE)
 
-## Description
-
 Java library for validating, decoding and generating random Polish Personal Identification Number (PESEL).
 
 ## Definition
@@ -19,25 +17,29 @@ You can read more about PESEL [**here**](https://en.wikipedia.org/wiki/PESEL)
 
 ## Installation
 
-To use this PESEL validation library in your Java project, you can add the dependency to your build tool.
+The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.0/overview).
 
-For Gradle, add the following line to your build.gradle file:
+### Gradle
+
+To use `PESEL` in a Gradle project, add the following line to your `build.gradle` file:
 
 ```java
-implementation 'io.github.viepovsky:pesel:1.0'
+implementation 'io.github.viepovsky:pesel:2.0.0'
 ```
 
-For Maven, add the following code to your pom.xml file:
+### Maven
+
+To use `PESEL` in a Maven project, add the following code to your `pom.xml` file:
 
 ```java
 <dependency>
     <groupId>io.github.viepovsky</groupId>
     <artifactId>pesel</artifactId>
-    <version>1.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-After adding the dependency, you can start using the PESEL validation library in your project.
+Once you have added the dependency, you can start using the `PESEL` library in your project.
 
 ## Usage
 
@@ -77,21 +79,21 @@ int control = pesel.getControlNumber();
 
 ### Generating random PESEL
 
-To generate a random PESEL, you can use the `PeselGenerator` class, which provides methods to generate PESELs with either default parameters or specified ones.
-
-To generate a PESEL with default parameters, you can use the static method `generatePeselStatic()`, which generates a PESEL with the following default parameters:
-
+To generate a random PESEL, you can use the static method `generatePeselStatic()` from the `PeselGenerator` class. 
+The method generates a PESEL with the following default parameters:
 - Random gender
 - Date of birth between today's date and 100 years before today's date.
 
-Here is an example code snippet to generate a PESEL with default parameters:
+Here is an example code snippet to generate a random PESEL:
 
 ```java
 String generatedPesel = PeselGenerator.generatePeselStatic();
 ```
 The `generatePeselStatic()` method returns a `String` with a random PESEL.
 
-If you want to generate a PESEL with specific parameters, you can use the `PeselGeneratorParams` class to specify the desired gender and date range. For example:
+### Generating random PESEL with custom parameters
+
+To generate a PESEL with custom parameters, you need to create a `PeselGeneratorParams` object in help of builder and set the desired gender and date range:
 
 ```java
 LocalDate minDate = LocalDate.of(1990, 1, 1); 
@@ -103,7 +105,11 @@ PeselGeneratorParams params = PeselGeneratorParams.builder()
         .minDate(minDate)
         .maxDate(maxDate)
         .build();
-        
+```
+
+Then, you can create a `PeselGenerator` object with the `PeselGeneratorParams` parameter object and call the `generatePesel()` method to generate a random PESEL with the specified parameters:
+
+```java
 PeselGenerator peselGenerator = new PeselGenerator(params);
 String generatedPesel = peselGenerator.generatePesel();
 ```
