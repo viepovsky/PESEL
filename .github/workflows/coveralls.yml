@@ -21,9 +21,13 @@ jobs:
       run: ./gradlew build
       
     - name: jacoco
+      run: ./gradlew jacocoTestReport
+      
+    - name: jacoco
       run: ./gradlew jacocoTestCoverageVerification
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        directory: build/reports/jacoco/
