@@ -3,6 +3,7 @@
 [![Build and test](https://img.shields.io/github/actions/workflow/status/viepovsky/PESEL/gradle.yml?style=plastic)](https://github.com/viepovsky/PESEL/actions/workflows/gradle.yml)
 [![Codecov coverage](https://img.shields.io/codecov/c/github/viepovsky/PESEL?style=plastic)](https://codecov.io/github/viepovsky/PESEL)
 [![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://github.com/viepovsky/PESEL/blob/master/LICENSE)
+[![javadoc](https://javadoc.io/badge2/io.github.viepovsky/pesel/javadoc.svg?style=plastic)](https://javadoc.io/doc/io.github.viepovsky/pesel)
 
 Java library for validating, decoding and generating random Polish Personal Identification Number (PESEL).
 
