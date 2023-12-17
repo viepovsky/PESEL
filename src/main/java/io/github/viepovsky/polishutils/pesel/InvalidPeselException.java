@@ -1,7 +1,7 @@
 package io.github.viepovsky.polishutils.pesel;
 
 /**
- * Checked exception thrown when an invalid PESEL number is encountered.
+ * Unchecked exception thrown when an invalid PESEL number is encountered.
  * Is thrown when the PESEL:
  * <ul>
  *     <li>has an invalid length (other than 11)
@@ -10,7 +10,7 @@ package io.github.viepovsky.polishutils.pesel;
  *     <li>has an invalid birth date (e.g. the 32nd of any month)
  * </ul>
  */
-public class InvalidPeselException extends Exception {
+public class InvalidPeselException extends RuntimeException {
     /**
      * Constructs a {@code InvalidPeselException} with the specified
      * detail message.

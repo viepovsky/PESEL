@@ -53,11 +53,11 @@ public class PeselGenerator {
     /**
      * The minimum date range from which a PESEL number will be generated.
      */
-    private LocalDate minDate;
+    private final LocalDate minDate;
     /**
      * The maximum date range to which a PESEL number will be generated.
      */
-    private LocalDate maxDate;
+    private final LocalDate maxDate;
 
     /**
      * Creates a new instance of the {@code PeselGenerator} class with the specified {@code PeselGeneratorParams}.

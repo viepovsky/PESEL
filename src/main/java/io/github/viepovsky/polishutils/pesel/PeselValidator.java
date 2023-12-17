@@ -48,7 +48,7 @@ public abstract class PeselValidator {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
-    public static void assertIsValid(String pesel) throws InvalidPeselException {
+    public static void assertIsValid(String pesel) {
         assertIsNotNull(pesel);
         assertIsLengthValid(pesel);
         assertIsOnlyDigits(pesel);
@@ -74,9 +74,9 @@ public abstract class PeselValidator {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL length is other than 11
      */
-    static void assertIsLengthValid(String pesel) throws InvalidPeselException {
+    static void assertIsLengthValid(String pesel) {
         if (pesel.length() != 11) {
-            throw new InvalidPeselException("PESEL length is invalid");
+            throw new InvalidPeselException("PESEL length is invalid, should be 11 numbers");
         }
     }
 
@@ -86,9 +86,9 @@ public abstract class PeselValidator {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL has other characters than digits
      */
-    static void assertIsOnlyDigits(String pesel) throws InvalidPeselException {
+    static void assertIsOnlyDigits(String pesel) {
         if (!pesel.matches("[0-9]*")) {
-            throw new InvalidPeselException("PESEL contains invalid characters");
+            throw new InvalidPeselException("PESEL contains invalid characters, should contain only digits 0-9");
         }
     }
 
@@ -98,7 +98,7 @@ public abstract class PeselValidator {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if given PESEL has invalid control number
      */
-    static void assertIsControlDigitValid(String pesel) throws InvalidPeselException {
+    static void assertIsControlDigitValid(String pesel) {
         if (!isControlDigitValid(pesel)) {
             throw new InvalidPeselException("PESEL control sum number is invalid");
         }
@@ -127,7 +127,7 @@ public abstract class PeselValidator {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL date of birth is invalid
      */
-    static void assertIsBirthDateValid(String pesel) throws InvalidPeselException {
+    static void assertIsBirthDateValid(String pesel) {
         if (!isBirthDateValid(pesel)) {
             throw new InvalidPeselException("PESEL birth date is invalid");
         }

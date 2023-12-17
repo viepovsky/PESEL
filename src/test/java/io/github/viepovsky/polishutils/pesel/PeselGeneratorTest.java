@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PeselGeneratorTest {
     @ParameterizedTest
     @MethodSource("providePesels")
-    void should_generate_pesel_with_given_params(LocalDate minDate, LocalDate maxDate) throws InvalidPeselException {
+    void should_generate_pesel_with_given_params(LocalDate minDate, LocalDate maxDate) {
         PeselGeneratorParams.Gender gender = PeselGeneratorParams.Gender.FEMALE;
 
         var params = PeselGeneratorParams.builder()
@@ -45,7 +45,7 @@ public class PeselGeneratorTest {
     }
 
     @RepeatedTest(100)
-    void should_generate_only_female_pesel() throws InvalidPeselException {
+    void should_generate_only_female_pesel() {
         var params = PeselGeneratorParams.builder()
                 .gender(PeselGeneratorParams.Gender.FEMALE)
                 .build();
@@ -60,7 +60,7 @@ public class PeselGeneratorTest {
     }
 
     @RepeatedTest(100)
-    void should_generate_only_male_pesel() throws InvalidPeselException {
+    void should_generate_only_male_pesel() {
         var params = PeselGeneratorParams.builder()
                 .gender(PeselGeneratorParams.Gender.MALE)
                 .build();
@@ -75,7 +75,7 @@ public class PeselGeneratorTest {
     }
 
     @RepeatedTest(100)
-    void should_generate_pesel_with_default_params() throws InvalidPeselException {
+    void should_generate_pesel_with_default_params() {
         var params = PeselGeneratorParams.builder().build();
         var generator = new PeselGenerator(params);
         String generatedPesel = generator.generatePesel();
@@ -114,7 +114,7 @@ public class PeselGeneratorTest {
     }
 
     @RepeatedTest(100)
-    void should_generate_correct_pesel_if_only_min_param_is_given() throws InvalidPeselException {
+    void should_generate_correct_pesel_if_only_min_param_is_given() {
         LocalDate minDate = LocalDate.of(2200, 1, 1);
         var params = PeselGeneratorParams.builder()
                 .minDate(minDate)
@@ -131,7 +131,7 @@ public class PeselGeneratorTest {
     }
 
     @RepeatedTest(100)
-    void should_generate_correct_pesel_if_only_max_param_is_given() throws InvalidPeselException {
+    void should_generate_correct_pesel_if_only_max_param_is_given() {
         LocalDate maxDate = LocalDate.of(2200, 1, 1);
         var params = PeselGeneratorParams.builder()
                 .maxDate(maxDate)
@@ -148,7 +148,7 @@ public class PeselGeneratorTest {
     }
 
     @Test
-    void should_generate_pesel_with_given_date() throws InvalidPeselException {
+    void should_generate_pesel_with_given_date() {
         LocalDate minDate = LocalDate.of(1955, 11, 22);
         LocalDate maxDate = LocalDate.of(1955, 11, 22);
         var params = PeselGeneratorParams.builder()

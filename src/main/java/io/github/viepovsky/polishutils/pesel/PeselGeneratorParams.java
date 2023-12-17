@@ -51,7 +51,7 @@ public class PeselGeneratorParams {
     /**
      * The gender that will be included in the generated PESEL numbers.
      */
-    private Gender gender;
+    private final Gender gender;
     /**
      * The earliest date from which a PESEL number will be generated.
      */

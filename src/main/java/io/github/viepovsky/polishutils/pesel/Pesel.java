@@ -47,7 +47,7 @@ public class Pesel extends PeselNumbers {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
-    public Pesel(String pesel) throws InvalidPeselException {
+    public Pesel(String pesel) {
         this(new PeselDecoder(), pesel);
     }
 
@@ -59,7 +59,7 @@ public class Pesel extends PeselNumbers {
      * @param pesel the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
-    private Pesel(PeselDecoder peselDecoder, String pesel) throws InvalidPeselException {
+    private Pesel(PeselDecoder peselDecoder, String pesel) {
         super(pesel);
         PeselValidator.assertIsValid(pesel);
         this.birthDate = peselDecoder.decodeBirthDate(pesel);

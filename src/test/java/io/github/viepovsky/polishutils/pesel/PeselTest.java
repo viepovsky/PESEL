@@ -39,7 +39,7 @@ class PeselTest {
 
     @ParameterizedTest
     @MethodSource("providePesels")
-    void should_return_correct_birth_date(String givenParam, LocalDate expectedDate) throws InvalidPeselException {
+    void should_return_correct_birth_date(String givenParam, LocalDate expectedDate) {
         var pesel = new Pesel(givenParam);
         assertEquals(expectedDate, pesel.getBirthDate());
     }
@@ -70,7 +70,7 @@ class PeselTest {
             "81122018287",
             "64031643742"
     })
-    void should_return_gender_female(String givenPesel) throws InvalidPeselException {
+    void should_return_gender_female(String givenPesel) {
         var pesel = new Pesel(givenPesel);
         assertEquals(Pesel.Gender.FEMALE.toString(), pesel.getGender());
     }
@@ -88,13 +88,13 @@ class PeselTest {
             "66020829795",
             "74040152795"
     })
-    void should_return_gender_male(String givenPesel) throws InvalidPeselException {
+    void should_return_gender_male(String givenPesel) {
         var pesel = new Pesel(givenPesel);
         assertEquals(Pesel.Gender.MALE.toString(), pesel.getGender());
     }
 
     @Test
-    void should_get_correct_pesel_numbers() throws InvalidPeselException {
+    void should_get_correct_pesel_numbers() {
         var pesel = new Pesel("74040152795");
 
         int retrievedBirthDate = pesel.getBirthDateNumbers();
