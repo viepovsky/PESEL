@@ -18,14 +18,14 @@ You can read more about PESEL [**here**](https://en.wikipedia.org/wiki/PESEL)
 
 ## Installation
 
-The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.0/overview).
+The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview).
 
 ### Gradle
 
 To use `PESEL` in a Gradle project, add the following line to your `build.gradle` file:
 
 ```java
-implementation 'io.github.viepovsky:pesel:2.0.0'
+implementation 'io.github.viepovsky:pesel:2.0.1'
 ```
 
 ### Maven
@@ -36,7 +36,7 @@ To use `PESEL` in a Maven project, add the following code to your `pom.xml` file
 <dependency>
     <groupId>io.github.viepovsky</groupId>
     <artifactId>pesel</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 
