@@ -1,5 +1,5 @@
 # PESEL
-[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.0)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.0/overview)
+[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.1)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview)
 [![Build and test](https://img.shields.io/github/actions/workflow/status/viepovsky/PESEL/gradle.yml?style=plastic)](https://github.com/viepovsky/PESEL/actions/workflows/gradle.yml)
 [![Codecov coverage](https://img.shields.io/codecov/c/github/viepovsky/PESEL?style=plastic)](https://codecov.io/github/viepovsky/PESEL)
 [![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://github.com/viepovsky/PESEL/blob/master/LICENSE)
