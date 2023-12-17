@@ -45,7 +45,7 @@ public class Pesel extends PeselNumbers {
      * Upon creation, the constructor validates the PESEL.
      *
      * @param pesel the PESEL number
-     * @if the given PESEL is invalid
+     * @throws InvalidPeselException if the given PESEL is invalid
      */
     public Pesel(String pesel) {
         this(new PeselDecoder(), pesel);
@@ -57,7 +57,7 @@ public class Pesel extends PeselNumbers {
      *
      * @param peselDecoder an instance of the {@code PeselDecoder} class
      * @param pesel the PESEL number
-     * @if the given PESEL is invalid
+     * @throws InvalidPeselException if the given PESEL is invalid
      */
     private Pesel(PeselDecoder peselDecoder, String pesel) {
         super(pesel);

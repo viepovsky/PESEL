@@ -37,7 +37,7 @@ class PeselNumbers {
      * thrown.
      *
      * @param pesel the PESEL number
-     * @if the given PESEL is invalid
+     * @throws InvalidPeselException if the given PESEL is invalid
      */
     PeselNumbers(String pesel) {
         PeselValidator.assertIsNotNull(pesel);
