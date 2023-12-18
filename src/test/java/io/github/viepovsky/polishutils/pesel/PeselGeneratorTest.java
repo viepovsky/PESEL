@@ -28,7 +28,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
 
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertTrue(pesel.getBirthDate().plusDays(1).isAfter(minDate));
         assertTrue(pesel.getBirthDate().minusDays(1).isBefore(maxDate));
         assertEquals(PeselGeneratorParams.Gender.FEMALE.toString(), pesel.getGender());
@@ -55,7 +55,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
         System.out.println(generatedPesel);
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertEquals(PeselGeneratorParams.Gender.FEMALE.toString(), pesel.getGender());
     }
 
@@ -70,7 +70,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
 
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertEquals(PeselGeneratorParams.Gender.MALE.toString(), pesel.getGender());
     }
 
@@ -84,7 +84,7 @@ public class PeselGeneratorTest {
         assertNotNull(generatedPesel);
         assertTrue(pesel.getBirthDate().plusDays(1).isAfter(LocalDate.now().minusYears(100)));
         assertTrue(pesel.getBirthDate().minusDays(1).isBefore(LocalDate.now()));
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
 
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertTrue(pesel.getBirthDate().plusDays(1).isAfter(minDate));
         assertTrue(pesel.getBirthDate().minusDays(1).isBefore(LocalDate.of(2299, 12, 31)));
     }
@@ -142,7 +142,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
 
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertTrue(pesel.getBirthDate().plusDays(1).isAfter(LocalDate.of(1800, 1, 1)));
         assertTrue(pesel.getBirthDate().minusDays(1).isBefore(maxDate));
     }
@@ -161,7 +161,7 @@ public class PeselGeneratorTest {
         var pesel = new Pesel(generatedPesel);
 
         assertNotNull(generatedPesel);
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
         assertEquals(pesel.getBirthDate(), minDate);
     }
 
@@ -169,6 +169,6 @@ public class PeselGeneratorTest {
     void should_generate_pesel_from_static_method() {
         String generatedPesel = PeselGenerator.generatePeselStatic();
 
-        assertTrue(PeselValidator.isValid(generatedPesel));
+        assertTrue(PeselValidator.isPeselValid(generatedPesel));
     }
 }

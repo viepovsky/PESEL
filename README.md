@@ -49,9 +49,9 @@ Once you have added the dependency, you can start using the `PESEL` library in y
 To validate a PESEL, you can use either the `Pesel` or `PeselValidator` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 //or
-PeselValidator.assertIsValid("92082683499"); //may throw InvalidPeselException
+PeselValidator.assertIsValid("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 //or
 boolean isPeselValid = PeselValidator.isValid("92082683499"); //returns true or false
 ```
@@ -61,9 +61,9 @@ boolean isPeselValid = PeselValidator.isValid("92082683499"); //returns true or 
 To decode a PESEL and retrieve information, use the `Pesel` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 String gender = pesel.getGender(); // returns MALE or FEMALE
-LocalDate birthDate = pesel.getBirthDate();
+LocalDate birthDate = pesel.getBirthDate(); // returns date of birth as LocalDate object
 ```
 
 ### Retrieving PESEL digits
@@ -71,11 +71,11 @@ LocalDate birthDate = pesel.getBirthDate();
 To retrieve specific digits from a PESEL, use the `Pesel` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
-int birthDate = pesel.getBirthDateNumbers();
-int serial = pesel.getSerialNumbers();
-int gender = pesel.getGenderNumber();
-int control = pesel.getControlNumber();
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
+int birthDateDigits = pesel.getBirthDateDigits();
+int serialDigits = pesel.getSerialDigits();
+int genderDigit = pesel.getGenderDigit();
+int controlDigit = pesel.getControlDigit();
 ```
 
 ### Generating random PESEL
@@ -123,7 +123,7 @@ When using `Pesel` or PeselValidator to validate, they may throw an exception if
 The `InvalidPeselException` message includes information about the validation of the invalid PESEL, and is thrown when the PESEL:
 - has an invalid length (other than 11)
 - has invalid characters (characters other than digits)
-- has an invalid control number (e.g. is 5 but should be 7)
+- has an invalid control digit (e.g. is 5 but should be 7)
 - has an invalid birth date (e.g. the 32nd of any month)
 
 When using `PeselGeneratorParams`, if you pass an out-of-range date parameter, it will throw an `IllegalArgumentException`.
