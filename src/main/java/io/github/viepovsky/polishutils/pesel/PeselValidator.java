@@ -18,10 +18,12 @@ import java.time.DateTimeException;
  * @author Oskar Rajzner
  */
 public abstract class PeselValidator {
+
     /**
      * Digits weight for checking the validity of the PESEL
      */
     private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1};
+
     /**
      * An instance of the {@code PeselDecoder} class.
      */

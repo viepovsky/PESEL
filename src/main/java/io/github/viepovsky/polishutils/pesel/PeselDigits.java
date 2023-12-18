@@ -11,18 +11,22 @@ package io.github.viepovsky.polishutils.pesel;
  * @author Oskar Rajzner
  */
 abstract class PeselDigits {
+
     /**
      * Year, month, and day digits of the PESEL number in form of YYMMDD (digits 1-6).
      */
     private int birthDateDigits;
+
     /**
      * Unique serial digits of the PESEL in form of ZZZ (digits 7-9).
      */
     private int serialDigits;
+
     /**
      * Gender digit of the PESEL in form of X (digit 10).
      */
     private int genderDigit;
+
     /**
      * Control sum digit of the PESEL in form of Q (digit 11).
      */

@@ -10,8 +10,10 @@ import java.time.LocalDate;
  * @author Oskar Rajzner
  */
 final class PeselDecoder {
+
     /**
      * Decodes the date of birth from given PESEL.
+     *
      * @param pesel the PESEL number
      * @return the date of birth as a LocalDate object
      */
@@ -46,6 +48,7 @@ final class PeselDecoder {
 
     /**
      * Decodes the gender from given PESEL.
+     *
      * @param pesel the PESEL number
      * @return the gender as a Pesel.Gender enum
      */

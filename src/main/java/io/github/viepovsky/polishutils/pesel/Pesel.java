@@ -18,7 +18,7 @@ import java.time.LocalDate;
  * <blockquote><pre>
  *     Pesel pesel = new Pesel("92082683499");
  * </pre></blockquote>
- *     and then you can access the PESEL values:
+ * and then you can access the PESEL values:
  * <blockquote><pre>
  *     String gender = pesel.getGender();
  *     LocalDate birthDate = pesel.getBirthDate();
@@ -31,10 +31,12 @@ import java.time.LocalDate;
  * @author Oskar Rajzner
  */
 public class Pesel extends PeselDigits {
+
     /**
      * The date of birth decoded from the given PESEL.
      */
     private final LocalDate birthDate;
+
     /**
      * The gender decoded from the given PESEL.
      */
@@ -56,7 +58,7 @@ public class Pesel extends PeselDigits {
      * Validates given PESEL, decodes and stores date of birth, gender and sets PESEL digits.
      *
      * @param peselDecoder an instance of the {@code PeselDecoder} class
-     * @param pesel the PESEL number
+     * @param pesel        the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
     private Pesel(PeselDecoder peselDecoder, String pesel) {
@@ -81,6 +83,7 @@ public class Pesel extends PeselDigits {
     public String getGender() {
         return String.valueOf(gender);
     }
+
     /**
      * Returns decoded date of birth of given PESEL number.
      *

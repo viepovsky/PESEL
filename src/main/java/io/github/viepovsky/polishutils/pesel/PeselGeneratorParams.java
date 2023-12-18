@@ -31,36 +31,42 @@ import java.time.LocalDate;
  * @see PeselGenerator
  */
 public class PeselGeneratorParams {
+
     /**
      * The earliest possible date from which a PESEL number can be generated.
      */
     private static final LocalDate MIN_DATE_POSSIBLE = LocalDate.of(1800, 1, 1);
+
     /**
      * The latest possible date to which a PESEL number can be generated.
      */
     private static final LocalDate MAX_DATE_POSSIBLE = LocalDate.of(2299, 12, 31);
+
     /**
      * The default earliest date from which a PESEL number can be generated,
      * which is 100 years before the current date.
      */
     private static final LocalDate DEFAULT_MIN_DATE = LocalDate.now().minusYears(100);
+
     /**
      * The default latest date to which a PESEL number can be generated, which is the current date.
      */
     private static final LocalDate DEFAULT_MAX_DATE = LocalDate.now();
+
     /**
      * The gender that will be included in the generated PESEL numbers.
      */
     private final Gender gender;
+
     /**
      * The earliest date from which a PESEL number will be generated.
      */
     private LocalDate minDate;
+
     /**
      * The latest date to which a PESEL number will be generated.
      */
     private LocalDate maxDate;
-
 
     /**
      * Constructs a new PeselGeneratorParams object using the Builder pattern.
