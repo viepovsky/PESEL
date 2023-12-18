@@ -1,5 +1,5 @@
 # PESEL
-[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.1)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview)
+[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.2)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.2/overview)
 [![Build and test](https://img.shields.io/github/actions/workflow/status/viepovsky/PESEL/gradle.yml?style=plastic)](https://github.com/viepovsky/PESEL/actions/workflows/gradle.yml)
 [![Codecov coverage](https://img.shields.io/codecov/c/github/viepovsky/PESEL?style=plastic)](https://codecov.io/github/viepovsky/PESEL)
 [![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://github.com/viepovsky/PESEL/blob/master/LICENSE)
@@ -18,14 +18,14 @@ You can read more about PESEL [**here**](https://en.wikipedia.org/wiki/PESEL)
 
 ## Installation
 
-The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview).
+The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.2/overview).
 
 ### Gradle
 
 To use `PESEL` in a Gradle project, add the following line to your `build.gradle` file:
 
 ```java
-implementation 'io.github.viepovsky:pesel:2.0.1'
+implementation 'io.github.viepovsky:pesel:2.0.2'
 ```
 
 ### Maven
@@ -36,7 +36,7 @@ To use `PESEL` in a Maven project, add the following code to your `pom.xml` file
 <dependency>
     <groupId>io.github.viepovsky</groupId>
     <artifactId>pesel</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
 </dependency>
 ```
 
