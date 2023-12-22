@@ -11,11 +11,12 @@ package io.github.viepovsky.polishutils.pesel;
  * </ul>
  */
 public class InvalidPeselException extends RuntimeException {
+
     /**
      * Constructs a {@code InvalidPeselException} with the specified
      * detail message.
      *
-     * @param   message   the detail message.
+     * @param message the detail message.
      */
     InvalidPeselException(String message) {
         super(message);

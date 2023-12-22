@@ -1,5 +1,5 @@
 # PESEL
-[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.1)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview)
+[![Maven central repository](https://img.shields.io/maven-central/v/io.github.viepovsky/pesel?style=plastic&versionPrefix=2.0.2)](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.2/overview)
 [![Build and test](https://img.shields.io/github/actions/workflow/status/viepovsky/PESEL/gradle.yml?style=plastic)](https://github.com/viepovsky/PESEL/actions/workflows/gradle.yml)
 [![Codecov coverage](https://img.shields.io/codecov/c/github/viepovsky/PESEL?style=plastic)](https://codecov.io/github/viepovsky/PESEL)
 [![License MIT](https://img.shields.io/github/license/viepovsky/PESEL?style=plastic)](https://github.com/viepovsky/PESEL/blob/master/LICENSE)
@@ -18,14 +18,14 @@ You can read more about PESEL [**here**](https://en.wikipedia.org/wiki/PESEL)
 
 ## Installation
 
-The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.1/overview).
+The `PESEL` library is available in the [Maven Central Repository](https://central.sonatype.com/artifact/io.github.viepovsky/pesel/2.0.2/overview).
 
 ### Gradle
 
 To use `PESEL` in a Gradle project, add the following line to your `build.gradle` file:
 
 ```java
-implementation 'io.github.viepovsky:pesel:2.0.1'
+implementation 'io.github.viepovsky:pesel:2.0.2'
 ```
 
 ### Maven
@@ -36,7 +36,7 @@ To use `PESEL` in a Maven project, add the following code to your `pom.xml` file
 <dependency>
     <groupId>io.github.viepovsky</groupId>
     <artifactId>pesel</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
 </dependency>
 ```
 
@@ -49,9 +49,9 @@ Once you have added the dependency, you can start using the `PESEL` library in y
 To validate a PESEL, you can use either the `Pesel` or `PeselValidator` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 //or
-PeselValidator.assertIsValid("92082683499"); //may throw InvalidPeselException
+PeselValidator.assertIsValid("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 //or
 boolean isPeselValid = PeselValidator.isValid("92082683499"); //returns true or false
 ```
@@ -61,9 +61,9 @@ boolean isPeselValid = PeselValidator.isValid("92082683499"); //returns true or 
 To decode a PESEL and retrieve information, use the `Pesel` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
 String gender = pesel.getGender(); // returns MALE or FEMALE
-LocalDate birthDate = pesel.getBirthDate();
+LocalDate birthDate = pesel.getBirthDate(); // returns date of birth as LocalDate object
 ```
 
 ### Retrieving PESEL digits
@@ -71,11 +71,11 @@ LocalDate birthDate = pesel.getBirthDate();
 To retrieve specific digits from a PESEL, use the `Pesel` class.
 
 ```java
-Pesel pesel = new Pesel("92082683499"); //may throw InvalidPeselException
-int birthDate = pesel.getBirthDateNumbers();
-int serial = pesel.getSerialNumbers();
-int gender = pesel.getGenderNumber();
-int control = pesel.getControlNumber();
+Pesel pesel = new Pesel("92082683499"); //if PESEL not valid it throws unchecked InvalidPeselException
+int birthDateDigits = pesel.getBirthDateDigits();
+int serialDigits = pesel.getSerialDigits();
+int genderDigit = pesel.getGenderDigit();
+int controlDigit = pesel.getControlDigit();
 ```
 
 ### Generating random PESEL
@@ -123,7 +123,7 @@ When using `Pesel` or PeselValidator to validate, they may throw an exception if
 The `InvalidPeselException` message includes information about the validation of the invalid PESEL, and is thrown when the PESEL:
 - has an invalid length (other than 11)
 - has invalid characters (characters other than digits)
-- has an invalid control number (e.g. is 5 but should be 7)
+- has an invalid control digit (e.g. is 5 but should be 7)
 - has an invalid birth date (e.g. the 32nd of any month)
 
 When using `PeselGeneratorParams`, if you pass an out-of-range date parameter, it will throw an `IllegalArgumentException`.

@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * A correct PESEL has 11 digits and contains information about the date of birth and gender.
  * It has the form of YYMMDDZZZXQ, where YYMMDD (digits 1-6) represents the date of birth, ZZZ (digits 7-9)
  * represents the unique serial number, and X (digit 10) determines the person's gender
- * (odd for males, even for females). The Q (digit 11) is a control sum number that verifies whether
+ * (odd for males, even for females). The Q (digit 11) is a control sum digit that verifies whether
  * a given PESEL is correct or not.
  * <p>
  * Upon construction, this class validates PESEL, it provides methods to decode and get gender and birthdate.
@@ -18,23 +18,25 @@ import java.time.LocalDate;
  * <blockquote><pre>
  *     Pesel pesel = new Pesel("92082683499");
  * </pre></blockquote>
- *     and then you can access the PESEL values:
+ * and then you can access the PESEL values:
  * <blockquote><pre>
  *     String gender = pesel.getGender();
  *     LocalDate birthDate = pesel.getBirthDate();
- *     int serialNumbers = pesel.getSerialNumbers();
+ *     int serialDigits = pesel.getSerialDigits();
  * </pre></blockquote>
  * Remember to catch exceptions upon construction. Passing a {@code null} argument to a constructor will
  * cause a {@link NullPointerException} to be thrown. Passing an invalid PESEL to a constructor will
- * cause an {@link InvalidPeselException} to be thrown.
+ * cause an unchecked {@link InvalidPeselException} to be thrown.
  *
  * @author Oskar Rajzner
  */
-public class Pesel extends PeselNumbers {
+public class Pesel extends PeselDigits {
+
     /**
      * The date of birth decoded from the given PESEL.
      */
     private final LocalDate birthDate;
+
     /**
      * The gender decoded from the given PESEL.
      */
@@ -52,18 +54,25 @@ public class Pesel extends PeselNumbers {
     }
 
     /**
-     * Private constructor of {@code Pesel} class. Creates a {@code PeselNumber} object,
-     * validates given PESEL, decodes and stores date of birth and gender.
+     * Private constructor of {@code Pesel} class.
+     * Validates given PESEL, decodes and stores date of birth, gender and sets PESEL digits.
      *
      * @param peselDecoder an instance of the {@code PeselDecoder} class
-     * @param pesel the PESEL number
+     * @param pesel        the PESEL number
      * @throws InvalidPeselException if the given PESEL is invalid
      */
     private Pesel(PeselDecoder peselDecoder, String pesel) {
-        super(pesel);
-        PeselValidator.assertIsValid(pesel);
+        super();
+
+        PeselValidator.assertIsPeselValid(pesel);
+
         this.birthDate = peselDecoder.decodeBirthDate(pesel);
         this.gender = peselDecoder.decodeGender(pesel);
+
+        setBirthDateDigits(pesel);
+        setSerialDigits(pesel);
+        setGenderDigit(pesel);
+        setControlDigit(pesel);
     }
 
     /**
@@ -74,6 +83,7 @@ public class Pesel extends PeselNumbers {
     public String getGender() {
         return String.valueOf(gender);
     }
+
     /**
      * Returns decoded date of birth of given PESEL number.
      *

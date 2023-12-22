@@ -38,22 +38,27 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * @see PeselGeneratorParams
  */
 public class PeselGenerator {
+
     /**
      * Digits weights for calculating the control digit of the PESEL.
      */
     private static final int[] CONTROL_WEIGHTS = new int[]{1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
+
     /**
      * A random number generator used for generating PESEL numbers.
      */
     private static final Random RANDOM = new Random();
+
     /**
      * The gender that will be included in the generated PESEL numbers.
      */
     private static PeselGeneratorParams.Gender gender;
+
     /**
      * The minimum date range from which a PESEL number will be generated.
      */
     private final LocalDate minDate;
+
     /**
      * The maximum date range to which a PESEL number will be generated.
      */
@@ -180,7 +185,6 @@ public class PeselGenerator {
     private static String getRandomSerialDigits() {
         return String.valueOf(RANDOM.nextInt(10)) + RANDOM.nextInt(10) + RANDOM.nextInt(10);
     }
-
 
     /**
      * Generates a random digit to represent the gender in the PESEL number. If a gender is specified,

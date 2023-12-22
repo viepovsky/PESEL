@@ -97,10 +97,10 @@ class PeselTest {
     void should_get_correct_pesel_numbers() {
         var pesel = new Pesel("74040152795");
 
-        int retrievedBirthDate = pesel.getBirthDateNumbers();
-        int retrievedRandom = pesel.getSerialNumbers();
-        int retrievedGender = pesel.getGenderNumber();
-        int retrievedControl = pesel.getControlNumber();
+        int retrievedBirthDate = pesel.getBirthDateDigits();
+        int retrievedRandom = pesel.getSerialDigits();
+        int retrievedGender = pesel.getGenderDigit();
+        int retrievedControl = pesel.getControlDigit();
 
         assertEquals(740401, retrievedBirthDate);
         assertEquals(527, retrievedRandom);
@@ -110,13 +110,13 @@ class PeselTest {
 
     @Test
     void should_return_true_if_pesel_is_valid_and_false_if_pesel_is_invalid() {
-        assertTrue(PeselValidator.isValid("78010469227"));
-        assertTrue(PeselValidator.isValid("73673198930"));
-        assertFalse(PeselValidator.isValid("78010469225"));
+        assertTrue(PeselValidator.isPeselValid("78010469227"));
+        assertTrue(PeselValidator.isPeselValid("73673198930"));
+        assertFalse(PeselValidator.isPeselValid("78010469225"));
     }
 
     @Test
     void should_throw_exception_if_pesel_is_invalid() {
-        assertThrows(InvalidPeselException.class, () -> PeselValidator.assertIsValid("78010469225"));
+        assertThrows(InvalidPeselException.class, () -> PeselValidator.assertIsPeselValid("78010469225"));
     }
 }
